@@ -33,6 +33,43 @@ Script Explanation
     It then extracts IOCs (Indicators of Compromise) from these events and saves them to a JSON file named IOCs.json.
     Next, it connects to the CrowdStrike API using the falconpy library and sends the IOCs to the CrowdStrike console.
 
+JSON File Format and Information Needed:
+
+    The JSON file (IOCs.json) should contain a list of IOCs in the following format:
+
+    json
+
+    [
+        {
+            "source": "MISP",
+            "action": "detect",
+            "expiration": "2023-01-22T15:00:00.000Z",
+            "description": "IOC from MISP",
+            "type": "<IOC_type>",
+            "value": "<IOC_value>",
+            "platforms": ["linux"],
+            "severity": "LOW",
+            "applied_globally": true
+        },
+        {
+            "source": "MISP",
+            "action": "detect",
+            "expiration": "2023-01-22T15:00:00.000Z",
+            "description": "IOC from MISP",
+            "type": "<IOC_type>",
+            "value": "<IOC_value>",
+            "platforms": ["linux"],
+            "severity": "LOW",
+            "applied_globally": true
+        }
+    ]
+
+        <IOC_type>: Type of the IOC (e.g., "ipv4", "domain", "hash").
+        <IOC_value>: Value of the IOC (e.g., IP address, domain name, hash value).
+        platforms: A list of platforms where the IOC is applicable (e.g., ["linux", "windows"]).
+        severity: The severity level of the IOC (e.g., "LOW", "MEDIUM", "HIGH").
+        applied_globally: A boolean indicating whether the IOC should be applied globally.
+
 Important Notes
 
     Ensure that your MISP instance is properly configured and contains events tagged with "crowdstrike".
